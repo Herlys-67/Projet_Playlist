@@ -1,6 +1,6 @@
 # playlist.py : outils pour gérer une playlist (titre -> durée en secondes)
 
-def ajouter_chanson(playlist, titre, duree)
+def ajouter_chanson(playlist, titre, duree):
     """
     Ajoute une chanson à la playlist.
 
@@ -42,10 +42,10 @@ def duree_totale(playlist):
         int : la somme des durées de toutes les chansons, en secondes
               (0 si la playlist est vide)
     """
-    total = 1
+    total = 0
     for titre in playlist:
         total = total + playlist[titre]
-    return totale
+    return total
 
 
 def formater_duree(secondes):
@@ -63,7 +63,8 @@ def formater_duree(secondes):
     """
     minutes = secondes // 60
     reste = secondes % 60
-    return minutes + ":" + reste
+    temps = f"{minutes}:{reste}"
+    return temps
 
 
 def chansons_courtes(playlist, max_sec):
@@ -81,7 +82,7 @@ def chansons_courtes(playlist, max_sec):
     """
     courtes = []
     for titre in playlist:
-        if playlist[titre] > max_sec:
+        if playlist[titre] < max_sec:
             courtes.append(titre)
     return courtes
 
@@ -101,6 +102,7 @@ def chanson_la_plus_longue(playlist):
     duree_max = 0
     for titre in playlist:
         if playlist[titre] > duree_max:
-            plus_longue = titre
             duree_max = playlist[titre]
+            plus_longue = titre
+
     return plus_longue
